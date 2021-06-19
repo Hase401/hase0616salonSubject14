@@ -18,7 +18,7 @@
 		BA091DB8267B75AE00C9B167 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA091DB7267B75AE00C9B167 /* ModalViewController.swift */; };
 		BA355F70267C9F520045CAD7 /* FruisArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA355F6F267C9F520045CAD7 /* FruisArray.swift */; };
 		BA355F72267C9F8D0045CAD7 /* Fruit.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA355F71267C9F8D0045CAD7 /* Fruit.swift */; };
-		BA355F74267CB7330045CAD7 /* FruitArrayRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA355F73267CB7330045CAD7 /* FruitArrayRepository.swift */; };
+		BA355F74267CB7330045CAD7 /* FruitsArrayRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA355F73267CB7330045CAD7 /* FruitsArrayRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,7 +35,7 @@
 		BA091DB7267B75AE00C9B167 /* ModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
 		BA355F6F267C9F520045CAD7 /* FruisArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruisArray.swift; sourceTree = "<group>"; };
 		BA355F71267C9F8D0045CAD7 /* Fruit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fruit.swift; sourceTree = "<group>"; };
-		BA355F73267CB7330045CAD7 /* FruitArrayRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitArrayRepository.swift; sourceTree = "<group>"; };
+		BA355F73267CB7330045CAD7 /* FruitsArrayRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitsArrayRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,7 +112,7 @@
 			children = (
 				BA355F6F267C9F520045CAD7 /* FruisArray.swift */,
 				BA355F71267C9F8D0045CAD7 /* Fruit.swift */,
-				BA355F73267CB7330045CAD7 /* FruitArrayRepository.swift */,
+				BA355F73267CB7330045CAD7 /* FruitsArrayRepository.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -216,7 +216,7 @@
 				BA355F70267C9F520045CAD7 /* FruisArray.swift in Sources */,
 				BA355F72267C9F8D0045CAD7 /* Fruit.swift in Sources */,
 				BA091DB5267B6DB800C9B167 /* CustomTableViewCell.swift in Sources */,
-				BA355F74267CB7330045CAD7 /* FruitArrayRepository.swift in Sources */,
+				BA355F74267CB7330045CAD7 /* FruitsArrayRepository.swift in Sources */,
 				BA091D70267A281C00C9B167 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

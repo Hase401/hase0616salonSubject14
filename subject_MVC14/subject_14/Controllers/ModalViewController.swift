@@ -9,6 +9,9 @@ import UIKit
 
 final class ModalViewController: UIViewController {
 
+    // 【疑問】共通化したModelでのfruitsプロバティの保存のやり方
+//    private let fruitsArray = FruitsArray()
+
     @IBOutlet private weak var modalLabel: UILabel!
     @IBOutlet private weak var modalTextField: UITextField!
 
