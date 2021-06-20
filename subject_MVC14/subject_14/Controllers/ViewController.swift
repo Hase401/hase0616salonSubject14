@@ -13,16 +13,16 @@ final class ViewController: UIViewController {
     private let fruitsArray = FruitsArray()
     private let fruitsArrayRepository = FruitsArrayRepository()
 
-    //　【メモ】次と同じ　private var fruits: [Dictionary<String, Any>] = []
-    //    var fruits: [[String: Any]] = []
-
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(CustomTableViewCell.nib(), forCellReuseIdentifier: CustomTableViewCell.identifier)
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
-//        self.fruitsArray.fruits = self.fruitsArrayRepository.load()
+        // できればこれなくしたい　設計というかやりたいことがまず自分がわかっていない
 //        self.fruitsArrayRepository.save(newFruitsArray: self.fruitsArray.fruits)
+        self.fruitsArray.fruits = self.fruitsArrayRepository.load()
+//        self.tableView.reloadData()
+        print(self.fruitsArrayRepository.load())
     }
 
     @IBAction func addCellDidTapped(_ sender: UIBarButtonItem) {
@@ -33,11 +33,11 @@ final class ViewController: UIViewController {
                 // 【メモ】Model使わない場合
 //                let newCell: [String: Any] = [self!.keyCheckMark: false, self!.keyName: text]
                 let newCell = Fruit(checkMark: false, name: text)
-                self?.fruitsArrayRepository.add(newFruit: newCell)
-//                self?.fruitsArray.fruits.append(newCell)
+                self?.fruitsArray.fruits.append(newCell)
 //                print(newCell)
 //                print(self?.fruitsArray.fruits)
-//                self?.fruitsArrayRepository.save(newFruitsArray: (self?.fruitsArray.fruits)!)
+                self?.fruitsArrayRepository.save(newFruitsArray: (self?.fruitsArray.fruits)!)
+                print(self?.fruitsArray.fruits)
                 self?.tableView.reloadData()
                 self?.dismiss(animated: true, completion: nil)
             },

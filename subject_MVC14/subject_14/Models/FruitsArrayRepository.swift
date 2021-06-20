@@ -14,26 +14,27 @@ struct FruitsArrayRepository {
 
     // [Fruit]型のデータを保存する
     func save(newFruitsArray: [Fruit]) {
-        UserDefaults.standard.set(newFruitsArray, forKey: Self.fruitsArrayKey)
+        let jsonEncoder = JSONEncoder()
+        jsonEncoder.keyEncodingStrategy = .convertToSnakeCase
+        print("saveBefore")
+        guard let newFA = try? jsonEncoder.encode(newFruitsArray) else {
+            return
+        }
+        print("saveAfter")
+        UserDefaults.standard.set(newFA, forKey: Self.fruitsArrayKey)
     }
-
-    func add(newFruit: Fruit) {
-        self.fruitsArray.fruits.append(newFruit)
-//        save(newFruitsArray: self.fruitsArray.fruits)
-    }
-//    func add(newFruit: Fruit) -> [Fruit] {
-//        self.fruitsArray.fruits.append(newFruit)
-//        print(self.fruitsArray.fruits)
-//        let newFruits = self.fruitsArray.fruits
-//        return newFruits
-//    }
 
     // 定義されていない型を取得する
     func load() -> [Fruit] {
-        let value = UserDefaults.standard.object(forKey: Self.fruitsArrayKey)
-        guard let newfruitsArray = value as? [Fruit] else {
+        let jsonDecoder = JSONDecoder()
+        jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+        print("loadBefore")
+        guard let newFA = UserDefaults.standard.data(forKey: Self.fruitsArrayKey),
+               // 【エラー】Use '.self' to reference the type object
+              let newFruitsArray = try? jsonDecoder.decode([Fruit].self, from: newFA) else {
             return []
         }
-        return newfruitsArray
+        print("loadAfter")
+        return newFruitsArray
     }
 }
