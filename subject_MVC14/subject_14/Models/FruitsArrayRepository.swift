@@ -8,20 +8,33 @@
 import Foundation
 
 // 【エラー】'final' modifier cannot be applied to this declaration
-//struct FruitsArrayRepository {
-//    private static let fruitsArrayKey = "fruitsArray"
-//
-//    // [Fruit]型のデータを保存する
-//    func save(_ newFruitsArray: [Fruit]) {
-//        UserDefaults.standard.set(newFruitsArray, forKey: Self.fruitsArrayKey)
-//    }
-//
-//    // 定義されていない型を取得する
-//    func load() -> [Fruit] {
-//        let value = UserDefaults.standard.object(forKey: Self.fruitsArrayKey)
-//        guard let newfruitsArray = value as? [Fruit] else {
-//            return []
-//        }
-//        return newfruitsArray
-//    }
-//}
+struct FruitsArrayRepository {
+    private static let fruitsArrayKey = "fruitsArray"
+    private let fruitsArray = FruitsArray()
+
+    // [Fruit]型のデータを保存する
+    func save(newFruitsArray: [Fruit]) {
+        let jsonEncoder = JSONEncoder()
+        jsonEncoder.keyEncodingStrategy = .convertToSnakeCase
+        print("saveBefore")
+        guard let newFA = try? jsonEncoder.encode(newFruitsArray) else {
+            return
+        }
+        print("saveAfter")
+        UserDefaults.standard.set(newFA, forKey: Self.fruitsArrayKey)
+    }
+
+    // 定義されていない型を取得する
+    func load() -> [Fruit] {
+        let jsonDecoder = JSONDecoder()
+        jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+        print("loadBefore")
+        guard let newFA = UserDefaults.standard.data(forKey: Self.fruitsArrayKey),
+               // 【エラー】Use '.self' to reference the type object
+              let newFruitsArray = try? jsonDecoder.decode([Fruit].self, from: newFA) else {
+            return []
+        }
+        print("loadAfter")
+        return newFruitsArray
+    }
+}

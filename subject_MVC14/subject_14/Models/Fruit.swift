@@ -8,7 +8,12 @@
 import Foundation
 
 // 【エラー】'final' modifier cannot be applied to this declaration
-struct Fruit {
+//  struct Fruit: Encodable {
+//    var checkMark: Bool
+//    var name: String
+//  }
+
+struct Fruit: Codable {
     var checkMark: Bool
     var name: String
 }
