@@ -9,19 +9,16 @@ import UIKit
 
 final class ModalViewController: UIViewController {
 
-    // 【疑問】共通化したModelでのfruitsプロバティの保存のやり方
-//    private let fruitsArray = FruitsArray()
-
     @IBOutlet private weak var modalLabel: UILabel!
     @IBOutlet private weak var modalTextField: UITextField!
 
     static func instantiate(didSelectPrefecture: @escaping (String) -> Void,
                             didCancel: @escaping () -> Void ) -> ModalViewController {
-//         【エラー】
+//         【Qiitaメモエラー】
 //        　let modalVC = UIStoryboard(name: "Main", bundle: nil)
 //                            .instantiateInitialViewController() as! ModalViewController
         let modalVC = UIStoryboard(name: "Main", bundle: nil)
-                        // 【メモ】storyboardIDを用いる
+                        // 【Qiitaメモ】storyboardIDを用いる
                         // swiftlint:disable:next force_cast
                         .instantiateViewController(identifier: "ModalViewController") as! ModalViewController
         modalVC.didSelectPrefectureHandler = didSelectPrefecture

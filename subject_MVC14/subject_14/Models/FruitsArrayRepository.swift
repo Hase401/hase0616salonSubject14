@@ -7,12 +7,11 @@
 
 import Foundation
 
-// 【エラー】'final' modifier cannot be applied to this declaration
+// 【疑問エラー】'final' modifier cannot be applied to this declaration
 struct FruitsArrayRepository {
     private static let fruitsArrayKey = "fruitsArray"
     private let fruitsArray = FruitsArray()
 
-    // [Fruit]型のデータを保存する
     func save(newFruitsArray: [Fruit]) {
         let jsonEncoder = JSONEncoder()
         jsonEncoder.keyEncodingStrategy = .convertToSnakeCase
@@ -24,13 +23,11 @@ struct FruitsArrayRepository {
         UserDefaults.standard.set(newFA, forKey: Self.fruitsArrayKey)
     }
 
-    // 定義されていない型を取得する
     func load() -> [Fruit] {
         let jsonDecoder = JSONDecoder()
         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
         print("loadBefore")
         guard let newFA = UserDefaults.standard.data(forKey: Self.fruitsArrayKey),
-               // 【エラー】Use '.self' to reference the type object
               let newFruitsArray = try? jsonDecoder.decode([Fruit].self, from: newFA) else {
             return []
         }
