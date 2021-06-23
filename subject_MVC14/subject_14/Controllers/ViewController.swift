@@ -23,7 +23,7 @@ final class ViewController: UIViewController {
 
     @IBAction func addCellDidTapped(_ sender: UIBarButtonItem) {
         let modalViewController = ModalViewController.instantiate(
-            didSelectPrefecture: { [weak self] text in
+            didSaveFruits: { [weak self] text in
                 // 【疑問】なぜselfを明示しないといけないのか, なぜself!でもいいのか、nilの場合エラーの可能性があるではないか
                 let newCell = Fruit(checkMark: false, name: text)
                 self?.fruitsArray.fruits.append(newCell)

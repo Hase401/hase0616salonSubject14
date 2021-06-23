@@ -12,7 +12,7 @@ final class ModalViewController: UIViewController {
     @IBOutlet private weak var modalLabel: UILabel!
     @IBOutlet private weak var modalTextField: UITextField!
 
-    static func instantiate(didSelectPrefecture: @escaping (String) -> Void,
+    static func instantiate(didSaveFruits: @escaping (String) -> Void,
                             didCancel: @escaping () -> Void ) -> ModalViewController {
 //         【Qiitaメモエラー】
 //        　let modalVC = UIStoryboard(name: "Main", bundle: nil)
@@ -21,12 +21,12 @@ final class ModalViewController: UIViewController {
                         // 【Qiitaメモ】storyboardIDを用いる
                         // swiftlint:disable:next force_cast
                         .instantiateViewController(identifier: "ModalViewController") as! ModalViewController
-        modalVC.didSelectPrefectureHandler = didSelectPrefecture
+        modalVC.didSaveFruitsHandler = didSaveFruits
         modalVC.didCancelHandler = didCancel
         return modalVC
     }
 
-    private var didSelectPrefectureHandler: (String) -> Void = { _ in }
+    private var didSaveFruitsHandler: (String) -> Void = { _ in }
     private var didCancelHandler: () -> Void = {}
 
     override func viewDidLoad() {
@@ -39,6 +39,6 @@ final class ModalViewController: UIViewController {
     }
     @IBAction func saveCellDataDidTapped(_ sender: UIBarButtonItem) {
         let text = modalTextField.text ?? ""
-        didSelectPrefectureHandler(text)
+        didSaveFruitsHandler(text)
     }
 }
