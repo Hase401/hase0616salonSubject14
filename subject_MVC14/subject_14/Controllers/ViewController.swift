@@ -10,7 +10,16 @@ import UIKit
 final class ViewController: UIViewController {
 
     @IBOutlet private weak var tableView: UITableView!
-    private let fruitsArray = FruitsArray()
+
+    private var fruitsArray: [Fruit] = []
+
+    private static let initialFruitsArray = [
+        Fruit(isChecked: false, name: "りんご"),
+        Fruit(isChecked: true, name: "みかん"),
+        Fruit(isChecked: false, name: "バナナ"),
+        Fruit(isChecked: true, name: "パイナップル")
+    ]
+
     private let fruitsArrayRepository = FruitsArrayRepository()
 
     override func viewDidLoad() {
@@ -18,18 +27,20 @@ final class ViewController: UIViewController {
         tableView.register(CustomTableViewCell.nib(), forCellReuseIdentifier: CustomTableViewCell.identifier)
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
-        self.fruitsArray.fruits = self.fruitsArrayRepository.load()
+        fruitsArray = fruitsArrayRepository.load() ?? Self.initialFruitsArray
     }
 
     @IBAction func addCellDidTapped(_ sender: UIBarButtonItem) {
-        let modalViewController = ModalViewController.instantiate(
+        let inputViewController = InputViewController.instantiate(
             didSaveFruits: { [weak self] text in
+                guard let strongSelf = self else { return }
                 // 【疑問】なぜselfを明示しないといけないのか, なぜself!でもいいのか、nilの場合エラーの可能性があるではないか
-                let newCell = Fruit(checkMark: false, name: text)
-                self?.fruitsArray.fruits.append(newCell)
-                self?.fruitsArrayRepository.save(newFruitsArray: (self?.fruitsArray.fruits)!)
-                self?.tableView.reloadData()
-                self?.dismiss(animated: true, completion: nil)
+                let newFruit = Fruit(isChecked: false, name: text)
+                strongSelf.fruitsArray.append(newFruit)
+
+                _ = strongSelf.fruitsArrayRepository.save(newFruitsArray: strongSelf.fruitsArray)
+                strongSelf.tableView.reloadData()
+                strongSelf.dismiss(animated: true, completion: nil)
             },
             didCancel: { [weak self] in
                 self?.dismiss(animated: true, completion: nil)
@@ -37,7 +48,7 @@ final class ViewController: UIViewController {
         )
         // 【Qiitaメモ】Storyboardで生成したNCを取得する方のやり方は？
         let navigationController = UINavigationController(
-            rootViewController: modalViewController
+            rootViewController: inputViewController
         )
         present(navigationController, animated: true)
     }
@@ -61,7 +72,7 @@ final class ViewController: UIViewController {
 extension ViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        fruitsArray.fruits.count
+        fruitsArray.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -69,7 +80,7 @@ extension ViewController: UITableViewDataSource {
         let customCell = tableView.dequeueReusableCell(
                             // swiftlint:disable:next force_cast
                             withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
-        customCell.configure(fruit: fruitsArray.fruits[indexPath.row])
+        customCell.configure(fruit: fruitsArray[indexPath.row])
         return customCell
     }
 }
