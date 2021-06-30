@@ -1,2 +1,2 @@
 # hase0616salonSubject14
-構造体FruitsにCodableを準拠させてUserDefaultsも活用
+構造体FruitsにCodableを準拠させてUserDefaultsを活用
