@@ -1,0 +1,2 @@
+# hase0616salonSubject14
+構造体FruitsにCodableを準拠させてUserDefaultsも活用
