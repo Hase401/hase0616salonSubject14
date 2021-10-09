@@ -10,17 +10,17 @@ import UIKit
 final class CustomTableViewCell: UITableViewCell {
 
     // 【疑問エラー】なぜかimageViewという名前はどこかで使っているのか（参照しているのか）エラーになる
-    @IBOutlet private var customImageView: UIImageView!
-    @IBOutlet private var customLabel: UILabel!
+    @IBOutlet private var checkmarkImageView: UIImageView!
+    @IBOutlet private var nameLabel: UILabel!
 
     static let identifier = "CustomTableViewCell"
 
     static func nib() -> UINib {
-        return UINib(nibName: "CustomTableViewCell", bundle: nil)
+        UINib(nibName: "CustomTableViewCell", bundle: nil)
     }
 
     func configure(fruit: Fruit) {
-        customLabel.text = fruit.name
-        customImageView.image = fruit.checkMark ? UIImage(systemName: "checkmark") : nil
+        nameLabel.text = fruit.name
+        checkmarkImageView.image = fruit.isChecked ? UIImage(systemName: "checkmark") : nil
     }
 }

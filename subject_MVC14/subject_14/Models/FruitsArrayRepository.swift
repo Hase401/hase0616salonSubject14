@@ -10,28 +10,24 @@ import Foundation
 // 【疑問エラー】'final' modifier cannot be applied to this declaration
 struct FruitsArrayRepository {
     private static let fruitsArrayKey = "fruitsArray"
-    private let fruitsArray = FruitsArray()
 
-    func save(newFruitsArray: [Fruit]) {
+    func save(newFruitsArray: [Fruit]) -> Bool {
         let jsonEncoder = JSONEncoder()
         jsonEncoder.keyEncodingStrategy = .convertToSnakeCase
-        print("saveBefore")
         guard let newFA = try? jsonEncoder.encode(newFruitsArray) else {
-            return
+            return false
         }
-        print("saveAfter")
         UserDefaults.standard.set(newFA, forKey: Self.fruitsArrayKey)
+        return true
     }
 
-    func load() -> [Fruit] {
+    func load() -> [Fruit]? {
         let jsonDecoder = JSONDecoder()
         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-        print("loadBefore")
         guard let newFA = UserDefaults.standard.data(forKey: Self.fruitsArrayKey),
               let newFruitsArray = try? jsonDecoder.decode([Fruit].self, from: newFA) else {
-            return []
+            return nil
         }
-        print("loadAfter")
         return newFruitsArray
     }
 }

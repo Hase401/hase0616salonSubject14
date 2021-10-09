@@ -39,8 +39,8 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="customImageView" destination="ElI-lD-GUO" id="sZB-qL-qiI"/>
-                <outlet property="customLabel" destination="4WM-8j-qLr" id="YjR-V2-SyW"/>
+                <outlet property="checkmarkImageView" destination="ElI-lD-GUO" id="J3x-lW-q7H"/>
+                <outlet property="nameLabel" destination="4WM-8j-qLr" id="bwu-M2-9Ae"/>
             </connections>
             <point key="canvasLocation" x="147" y="75"/>
         </tableViewCell>

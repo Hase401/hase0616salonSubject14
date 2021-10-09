@@ -9,6 +9,6 @@ import Foundation
 
 // 【疑問エラー】'final' modifier cannot be applied to this declaration
 struct Fruit: Codable {
-    var checkMark: Bool
+    var isChecked: Bool
     var name: String
 }
